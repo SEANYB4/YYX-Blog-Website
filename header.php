@@ -1,3 +1,8 @@
+<?php
+    session_start();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,12 +20,26 @@
 
 
 <nav>
-        <a class="logo" href="index.php"><img src="img/blogsphere.png" alt="logo"></a>   
+        
         <ul>
             <li><a class="nav-button" href="index.php">Home</a></li>
             <li><a class="nav-button" href="about.php">About</a></li>
             <li><a class="nav-button" href="blog.php">Find Blogs</a></li>
-            <li><a class="nav-button" href="signup.php">Sign Up</a></li>
-            <li><a class="nav-button" href="login.php">Log In</a></li>  
+
+            <?php
+
+                if(isset($_SESSION['useruid'])) {
+
+                    echo "<li><a class='nav-button' href='profile.php'>Profile</a></li>";
+                    echo "<li><a class='nav-button' href='logout.php'>Log Out</a></li>";  
+                } else {
+
+                    echo "<li><a class='nav-button' href='signup.php'>Sign Up</a></li>";
+                    echo "<li><a class='nav-button' href='login.php'>Log In</a></li>";  
+                }
+
+            ?>
+
+            
         </ul>
 </nav>

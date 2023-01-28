@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,33 +18,62 @@
 <body>
 
 
-    <nav>
+    
         <div class="banner">
 
-            <a class="logo" href="index.php"><img src="img/blogsphere.png" alt="logo"></a>
+            <a class="logo" href="index.php"  id="logo"><img src="img/blogsphere.png" alt="logo"></a>
             
+            <img class="logo2" src="img/avatar.png" alt="YYX" id="avatar">
+
             <h1 class="heading">YYX BLOGS</h1>
             
             
             <div class="hero">
                 <img src="./img/jess-bailey-q10VITrVYUM-unsplash.jpg" alt="hero image">
-                
+             
             </div>
-            
+      
+        </div>
+        <nav>
+
             <ul>
                 <li><a class="nav-button" href="index.php">Home</a></li>
                 <li><a class="nav-button" href="about.php">About</a></li>
                 <li><a class="nav-button" href="blog.php">Find Blogs</a></li>
-                <li><a class="nav-button" href="signup.php">Sign Up</a></li>
-                <li><a class="nav-button" href="login.php">Log In</a></li>  
+
+                <?php
+
+                    if(isset($_SESSION['useruid'])) {
+
+                        echo "<li><a class='nav-button' href='profile.php'>Profile</a></li>";
+                        echo "<li><a class='nav-button' href='includes/logout.inc.php'>Log Out</a></li>";
+
+                        
+                    } else {
+
+                        echo "<li><a class='nav-button' href='signup.php'>Sign Up</a></li>";
+                        echo "<li><a class='nav-button' href='login.php'>Log In</a></li>";  
+                    }
+
+                ?>
             </ul>
-        </div>
-    </nav>
+
+        </nav>    
+       
 
 
     <div class="wrapper1">
         <section class="index-intro">
-            <h1>HELLO YINYING</h1>
+            <?php
+                if(isset($_SESSION['useruid'])) {
+
+                   echo "<h1>HELLO " . $_SESSION['useruid'] . "</h1>";
+                 } else {
+                   echo "<h1>Hello Visitor!</h1>";
+
+                }
+
+            ?>
             <p>Here is an important paragraph that explains the purpose of the website.</p>
 
         </section>
@@ -76,5 +109,5 @@
 </body>
 </html>
 
-
+<script src="./js/jquery-2.2.3.min.js"></script>
 <script src="./js/index.js"></script>
